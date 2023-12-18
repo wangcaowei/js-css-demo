@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #area {
+            width: 600px;
+            height: 400px;
+            background-color:antiquewhite;
+        }
+
+        #menu {
+            background-color: #fff;
+            position: absolute;
+            visibility: hidden;
+            font-size: 12px;
+            padding: 3px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #menu>div {
+            width: 100px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border-bottom: 1px solid #fff;
+        }
+
+        #menu>div:hover {
+            background-color: #ccc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="area">
+        <div id="menu">
+            <div onclick="chooseMenu('新建文件')">新建文件</div>
+            <div onclick="chooseMenu('新建表格')">新建表格</div>
+            <div onclick="chooseMenu('新建ppt')">新建ppt</div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('area').oncontextmenu = function(e) {
+            e.stopPropagation();
+            const scrollLeft = document.body.scrollLeft || document.documentElement.scrollLeft || 0;
+            const screenTop = document.body.scrollTop || document.documentElement.scrollTop || 0;
+            const x = e.clientX + scrollLeft;
+            const y = e.clientY + screenTop;
+            const menuEle = document.getElementById('menu');
+            menuEle.style.visibility = 'visible';
+            menuEle.style.left = x + 'px';
+            menuEle.style.top = y +'px';
+            return false; //阻止系统右键菜单
+        }
+
+        document.documentElement.onclick = function() {
+            document.getElementById('menu').style.visibility = 'hidden';
+        }
+
+        var chooseMenu =function(val) {
+            console.log(val)
+        }
+    </script>
+</body>
+</html>

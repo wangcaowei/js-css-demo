@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var obj = {
+        tool: {
+          _path: "/tool",
+          record: {
+            _path: "/record",
+            a: "/a",
+            b: "/b",
+            c: {
+              _path: "/c",
+              dd: "/dd",
+            },
+          },
+        },
+        report: {
+          _path: "/report",
+          record: {
+            _path: "/record",
+            a: "/a",
+            b: "/b",
+            c: {
+              _path: "/c",
+              dd: "/dd",
+            },
+          },
+        },
+      };
+
+      function recursion(obj, path = '') {
+        var newObj = {};
+        for (const [k, v] of Object.entries(obj)) {
+          const isObj = typeof v === "object";
+          if (isObj) {
+            newObj[k] = recursion(v,path);
+          } else {
+            if(k==='_path'){
+              newObj[k] = v;
+              path += v;
+            }else {
+              newObj[k] = path + v;
+            }
+          }
+        }
+        return newObj;
+      }
+
+      const res = recursion(obj);
+      console.log(res);
+    </script>
+  </body>
+</html>

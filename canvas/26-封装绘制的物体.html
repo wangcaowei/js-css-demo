@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas,请下载最新的浏览器
+    </canvas>
+
+    <script>
+        /** @type {HTMLCanvasElement} */
+        var c1=document.getElementById("c1");
+
+        if(!c1.getContext){
+            console.log("当前浏览器不支持canvas,请下载最新的浏览器")
+        }
+        
+        var ctx=c1.getContext("2d");
+
+        // 绘制爱心
+        // var heartPath=new Path2D();
+        // heartPath.moveTo(300,200);
+        // heartPath.bezierCurveTo(350,150,400,200,300,250);
+        // heartPath.bezierCurveTo(200,200,250,150,300,200);
+        // ctx.stroke(heartPath);
+
+        class Heart{
+            constructor(x,y){
+                // 爱心起始点
+                this.x=x;
+                this.y=y;
+                // 爱心颜色
+                this.color="red";
+                // 是否在爱心上
+                this.isIn=false;
+                // 鼠标事件操作
+                this.eventMapList={
+                    hover:[],
+                    leave:[]
+                };
+
+                // 鼠标悬浮事件监听
+                c1.onmousemove=(e)=>{
+                    let x=e.offsetX;
+                    let y=e.offsetY;
+                    this.isIn=ctx.isPointInPath(this.heartPath,x,y);
+                    if(this.isIn){
+                        this.eventMapList.hover.forEach(item=>{
+                            item();
+                        })
+                    }else{
+                        this.eventMapList.leave.forEach(item=>{
+                            item();
+                        })
+                    }
+                }
+            };
+            onHover(fn){
+                this.eventMapList.hover.push(fn);
+            }
+            onLeave(fn){
+                this.eventMapList.leave.push(fn);
+            }
+            setPosition(x,y){
+                this.x=x;
+                this.y=y;
+            };
+            draw(){
+                this.heartPath=new Path2D();
+                this.heartPath.moveTo(this.x,this.y);
+                this.heartPath.bezierCurveTo(this.x+50,this.y-50,this.x+100,this.y,this.x,this.y+50);
+                this.heartPath.bezierCurveTo(this.x-100,this.y,this.x-50,this.y-50,this.x,this.y);
+                ctx.save();
+                ctx.fillStyle=this.color;
+                ctx.fill(this.heartPath);
+                ctx.restore();
+            }
+        }
+
+        let heart=new Heart(100,100);
+        heart.onHover(()=>{heart.color="blue"});
+        heart.onLeave(()=>{heart.color="red"});
+
+        function render(){
+            ctx.clearRect(0,0,c1.width,c1.height);
+            heart.draw();
+            requestAnimationFrame(render);
+        }
+
+        render();
+    </script>
+</body>
+</html>

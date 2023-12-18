@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas,请下载最新的浏览器
+    </canvas>
+
+    <script>
+        var c1=document.getElementById("c1");
+
+        if(!c1.getContext){
+            console.log("当前浏览器不支持canvas,请下载最新的浏览器")
+        }
+        
+        var ctx=c1.getContext("2d");
+        let index=0;
+        function render(){
+            ctx.clearRect(0,0,600,400);
+            index++;
+            if(index>40){
+                index=0;
+            }
+            ctx.moveTo(150,150);
+            ctx.lineTo(300,200);
+            ctx.lineTo(450,150);
+
+            // 设置线条样式
+            ctx.lineWidth=1;
+            // 设置线条端点样式 butt平齐 round半圆 square正方形
+            ctx.lineCap="square";
+            // 设置线段连接处样式 mitter外侧相连的角 round圆角 bevel折平
+            ctx.lineJoin="mitter";
+            // 对斜截面进行限制
+            ctx.miterLimit=5;
+
+            // 设置虚线
+            ctx.setLineDash([40,20]);
+            // 设置虚线偏移
+            ctx.lineDashOffset=index;
+            ctx.stroke();
+            requestAnimationFrame(render)
+        }
+        render()
+    </script>
+</body>
+</html>

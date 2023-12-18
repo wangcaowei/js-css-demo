@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <style>
+      #container {
+        border: 1px solid #333;
+        width: fit-content;
+        padding: 50px 74px 50px 50px;
+        cursor: all-scroll;
+        box-shadow: 2px 2px 5px #333;
+        position: fixed;
+        left: 0;
+        top: 0;
+      }
+      .father {
+        width: fit-content;
+        position: relative;
+        /* margin-right: 24px; */
+        margin-left: 24px;
+      }
+      .father::before {
+        position: absolute;
+        top: 50%;
+        left: -24px;
+        content: "";
+        width: 24px;
+        height: 1px;
+        background-color: #ccc;
+      }
+      .father:only-child:after {
+        position: absolute;
+        top: 50%;
+        right: -24px;
+        content: "";
+        width: 24px;
+        height: 1px;
+        background-color: #ccc;
+      }
+      .relative {
+        position: relative;
+      }
+      .flex-row {
+        display: flex;
+        align-items: center;
+        position: relative;
+        /* width: fit-content; */
+      }
+      /* .flex-row:first-child:not(:only-child)::before {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            content: '';
+            width: 1px;
+            height: 100%;
+            background-color: #f00;
+            z-index: 100;
+        } */
+      /* .flex-row:first-child:not(:only-child)::after {
+            position: absolute;
+            top: 50%;
+            right: -24px;
+            content: '';
+            width: 1px;
+            height: 44px;
+            background-color: #ccc;
+        } */
+      .flex-row:last-child:not(:only-child)::before {
+        position: absolute;
+        top: calc(-50%);
+        left: 0;
+        content: "";
+        width: 1px;
+        height: 100%;
+        background-color: #ccc;
+      }
+      .flex-row:last-child:not(:only-child):after {
+        position: absolute;
+        top: calc(-50%);
+        right: 0;
+        content: "";
+        width: 1px;
+        height: 100%;
+        background-color: #ccc;
+      }
+      .flex-row:not(:first-child):not(:last-child):before {
+        position: absolute;
+        top: calc(-50%);
+        left: 0;
+        content: "";
+        width: 1px;
+        height: 100%;
+        background-color: #ccc;
+      }
+      .flex-row:not(:first-child):not(:last-child)::after {
+        position: absolute;
+        top: calc(-50%);
+        right: 0;
+        content: "";
+        width: 1px;
+        height: 100%;
+        background-color: #ccc;
+      }
+      .flex-row .line {
+        height: 1px;
+        flex: 1;
+        background-color: #ccc;
+        margin-left: 24px;
+      }
+      .flex-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .box {
+        width: 65px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border: 1px solid #ccc;
+        font-weight: 600;
+        position: relative;
+        margin: 20px 0 20px 23px;
+      }
+      .box::before {
+        position: absolute;
+        top: 50%;
+        left: -24px;
+        content: "";
+        width: 24px;
+        height: 1px;
+        background-color: #ccc;
+      }
+      /* .box::after{
+            position: absolute;
+            top: 50%;
+            right: -24px;
+            content: '';
+            width: 24px;
+            height: 1px;
+            background-color: #ccc;
+        } */
+      .row {
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+      .row::after {
+        content: "";
+        display: block;
+        flex: 1;
+        height: 1px;
+        background-color: #ccc;
+        min-width: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="container">
+        <!-- 最外层(每一列) -->
+        <div class="father">
+          <!-- 每一行 -->
+          <div class="flex-row">
+            <div class="row">
+              <!-- 每一块 -->
+              <div class="box">1</div>
+            </div>
+          </div>
+          <!-- 每一行 -->
+          <div class="flex-row">
+            <div class="row">
+              <!-- 每一块 -->
+              <div class="box">3</div>
+            </div>
+          </div>
+          <!-- 每一行 -->
+          <div class="flex-row">
+            <div class="row">
+              <!-- 每一块 -->
+              <div class="box">3</div>
+            </div>
+          </div>
+          <div class="flex-row">
+            <div class="row">
+              <div class="father">
+                <!-- 每一行 -->
+                <div class="flex-row">
+                  <div class="row">
+                    <!-- 每一块 -->
+                    <div class="box">1</div>
+                  </div>
+                </div>
+                <!-- 每一行 -->
+                <div class="flex-row">
+                  <div class="row">
+                    <!-- 每一块 -->
+                    <div class="box">1</div>
+                  </div>
+                </div>
+              </div>
+              <div class="box">8</div>
+            </div>
+          </div>
+          <div class="flex-row">
+            <div class="row">
+              <div class="father">
+                <!-- 每一行 -->
+                <div class="flex-row">
+                  <div class="row">
+                    <!-- 每一块 -->
+                    <div class="box">1</div>
+                  </div>
+                </div>
+                <div class="flex-row">
+                  <div class="row">
+                    <!-- 每一块 -->
+                    <div class="box">1</div>
+                  </div>
+                </div>
+                <!-- 每一行 -->
+                <div class="flex-row">
+                  <div class="row">
+                    <!-- 每一块 -->
+                    <div class="box">1</div>
+                  </div>
+                </div>
+              </div>
+              <div class="box">8</div>
+              <div class="box">8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          str: "1||2||3",
+          array: [1, [2, 3], [[4, 5], 6]],
+          isDrag: false,
+          container: "",
+          startX: "",
+          startY: "",
+        },
+        mounted() {
+          this.container = document.getElementById("container");
+          this.container.onmousedown = this.startDrag;
+          this.container.onmouseup = this.endDrag;
+          this.container.onmousemove = this.moveContainer;
+            var newArray = this.parseExpression(this.str);
+            console.log(newArray);
+        },
+        methods: {
+          startDrag(e) {
+            this.isDrag = true;
+            this.startX = e.offsetX;
+            this.startY = e.offsetY;
+            this.container.onmousemove = this.moveContainer;
+          },
+          endDrag() {
+            this.isDrag = false;
+            this.startX = 0;
+            this.startY = 0;
+            this.container.onmousemove = null;
+          },
+          moveContainer(e) {
+            if (this.isDrag) {
+              let x = e.clientX - this.startX;
+              let y = e.clientY - this.startY;
+              if (x < 0) x = 0;
+              if (x > window.innerWidth - this.container.offsetWidth) {
+                x = window.innerWidth - this.container.offsetWidth;
+              }
+              if (y < 0) y = 0;
+              if (y > window.innerHeight - this.container.offsetHeight) {
+                y = window.innerHeight - this.container.offsetHeight;
+              }
+              this.container.style.top = y + "px";
+              this.container.style.left = x + "px";
+            }
+          },
+          // 写一个递归函数，把字符串“1||2&&3||(4||5)&&6”循环遍历成数组[1,[2,3],[[4,5],6]]
+          parseExpression(str) {
+            var arr = [];
+            var reg = /[\|\|]/g;
+            var reg1 = /[\&\&]/g;
+            if(!reg.test(str)){
+                arr.push(str)
+                return arr;
+            }else{
+                str.split(reg).forEach(item => {
+                    if(reg1.test(item)){
+                        item.split(reg1).forEach(item1=>{
+                            return arr.push(this.parseExpression(item1))
+                        })
+                    }else {
+                        arr.push(item)
+                    }
+                });
+                return arr;
+            }
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

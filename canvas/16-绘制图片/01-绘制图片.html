@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas,请下载最新的浏览器
+    </canvas>
+
+    <script>
+        var c1=document.getElementById("c1");
+
+        if(!c1.getContext){
+            console.log("当前浏览器不支持canvas,请下载最新的浏览器")
+        }
+        
+        var ctx=c1.getContext("2d");
+
+        // 获取图片
+        var img=new Image();
+        img.src="./imgs/吃饭.png"
+
+        img.onload=function(){
+            // 第一种绘制图片方式,图片对象，水平位置，垂直位置
+            // ctx.drawImage(img,0,0);
+
+            // 第二种绘制图片,图片对象，水平位置，垂直位置,图片缩放到对应宽度，高度
+            // ctx.drawImage(img,0,0,600,400);
+
+            // 第三种绘制图片的方式，img参数后面的四个参数是，原图片要裁减的起点位置和矩形宽高，
+            // 后面四个参数是，画布位置和渲染的巨型宽高
+            ctx.drawImage(img,10,10,100,100,0,0,600,400);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @keyframes throttle {
+            from {
+                color: red;
+                pointer-events: none;
+            }
+            to {
+                color: green;
+                pointer-events: all;
+            }
+        }
+
+        button.save{
+            animation: throttle 2s step-end forwards;
+        }
+
+        button:active{
+            animation: none;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="console.log('普通保存')">我是“普通”保存</button>
+    <!-- 仅限于点击事件， 滚动事件和键盘事件用传统js方式实现-->
+    <!-- 禁用逻辑和业务逻辑是完全解耦的 -->
+    <button class="save" onclick="console.log('节流保存')">我是“节流”保存</button>
+</body>
+</html>

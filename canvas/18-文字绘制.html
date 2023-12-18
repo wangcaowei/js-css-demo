@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas,请下载最新的浏览器
+    </canvas>
+
+    <script>
+        var c1=document.getElementById("c1");
+
+        if(!c1.getContext){
+            console.log("当前浏览器不支持canvas,请下载最新的浏览器")
+        }
+        
+        var ctx=c1.getContext("2d");
+
+        // 文字，大小，字体
+        ctx.strokeStyle="#ff0000";
+        ctx.font="100px Microsoft YaHei";
+        // 填充渲染文字,文本，位置x,位置y，文字的最大宽度
+        // ctx.fillText("老王",300,200,100);
+
+        // 文本对齐选项textAlign, start end center left right
+        ctx.textAlign="center";
+
+        // 文本基线对齐textBaseline,top bottom alphabetic middle
+        ctx.textBaseline="middle";
+
+        // 文本的方向
+        // ctx.direction="rtl"
+
+        // 预测量文本宽度
+        let text=ctx.measureText("Hello!");
+        console.log(text);
+
+        ctx.strokeText("Hello!",300,200);
+        ctx.arc(300,200,5,0,2*Math.PI);
+        ctx.fill();
+
+    </script>
+</body>
+</html>

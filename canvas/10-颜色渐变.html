@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas,请下载最新的浏览器
+    </canvas>
+
+    <script>
+        var c1=document.getElementById("c1");
+
+        if(!c1.getContext){
+            console.log("当前浏览器不支持canvas,请下载最新的浏览器")
+        }
+        
+        var ctx=c1.getContext("2d");
+
+        // 线性渐变
+        // let index=0;
+        // function render(){
+        //     ctx.clearRect(0,0,600,400)
+        //     index+=0.01
+        //     if(index>1){
+        //         index=0;
+        //     }
+        //     let linearGradient=ctx.createLinearGradient(100,200,400,500);
+        //     linearGradient.addColorStop(0,"red");
+        //     linearGradient.addColorStop(index,"#ffcccc");
+        //     linearGradient.addColorStop(1,"blue");
+        //     ctx.fillStyle=linearGradient;
+        //     ctx.fillRect(100,200,300,300);
+        //     requestAnimationFrame(render);
+        // }
+
+        // requestAnimationFrame(render);
+
+        // 径向渐变
+        // 3d球 圆心x 圆心y 半径1 圆心x2 圆心y2 半径2
+        // let radialGradient=ctx.createRadialGradient(250,150,10,300,200,100);
+        // radialGradient.addColorStop(0,"#ffcccc");
+        // radialGradient.addColorStop(1,"red");
+        // ctx.fillStyle=radialGradient;
+        // ctx.arc(300,200,100,0,Math.PI*2);
+        // ctx.fill();
+
+        // 圆锥渐变 角度，位置x,位置y
+        let coneGradient = ctx.createConicGradient(Math.PI/4,300,200);
+        coneGradient.addColorStop(0,"red");
+        coneGradient.addColorStop(0.5,"yellow");
+        coneGradient.addColorStop(1,"blue");
+        ctx.fillStyle=coneGradient;
+        ctx.fillRect(0,0,600,400);
+    </script>
+</body>
+</html>

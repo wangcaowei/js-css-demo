@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas,请下载最新的浏览器
+    </canvas>
+
+    <script>
+        var c1=document.getElementById("c1");
+
+        if(!c1.getContext){
+            console.log("当前浏览器不支持canvas,请下载最新的浏览器")
+        }
+        
+        var ctx=c1.getContext("2d");
+        ctx.fillStyle="rgba(0,0,255,1)";
+        ctx.fillRect(300,200,100,100);
+        ctx.globalCompositeOperation="source-in";
+        ctx.fillStyle="rgba(255,0,0,1)";
+        ctx.fillRect(250,150,100,100);
+    </script>
+</body>
+</html>

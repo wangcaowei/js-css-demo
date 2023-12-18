@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas,请下载最新的浏览器
+    </canvas>
+
+    <script>
+        var c1=document.getElementById("c1");
+
+        if(!c1.getContext){
+            console.log("当前浏览器不支持canvas,请下载最新的浏览器")
+        }
+        
+        var ctx=c1.getContext("2d");
+
+
+        // 变换的都是坐标系
+        // translate 位移坐标系
+        // ctx.translate(100,100);
+
+        // scale 缩放
+        // ctx.scale(5,2);
+
+        // 旋转
+        // ctx.rotate(Math.PI/6);
+
+        ctx.translate(300,200);
+        ctx.rotate(Math.PI/4);
+        ctx.scale(2,1);
+        ctx.fillRect(-250,-25,500,50);
+    </script>
+</body>
+</html>

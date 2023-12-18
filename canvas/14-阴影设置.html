@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas,请下载最新的浏览器
+    </canvas>
+
+    <script>
+        var c1=document.getElementById("c1");
+
+        if(!c1.getContext){
+            console.log("当前浏览器不支持canvas,请下载最新的浏览器")
+        }
+        
+        var ctx=c1.getContext("2d");
+
+        // 创建一条折线
+        var polyline=new Path2D("M10 10 h 80 v 80 h -80 z");
+        // 设置阴影
+        ctx.shadowOffsetX=10;
+        ctx.shadowOffsetY=10;
+        ctx.shadowBlur=5;
+        ctx.shadowColor="rgba(255,100,100,1)";
+        ctx.stroke(polyline);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas,请下载最新的浏览器
+    </canvas>
+
+    <script>
+        var c1=document.getElementById("c1");
+
+        if(!c1.getContext){
+            console.log("当前浏览器不支持canvas,请下载最新的浏览器")
+        }
+        
+        var ctx=c1.getContext("2d");
+
+        // var heartPath=new Path2D();
+        // heartPath.moveTo(300,200);
+        // heartPath.bezierCurveTo(350,150,400,200,300,250);
+        // heartPath.bezierCurveTo(200,200,250,150,300,200);
+        // ctx.stroke(heartPath);
+
+        // 绘制微信图标
+        var chatPath=new Path2D();
+        chatPath.moveTo(200,300);
+        chatPath.quadraticCurveTo(150,300,150,200);
+        chatPath.quadraticCurveTo(150,100,300,100);
+        chatPath.quadraticCurveTo(450,100,450,200);
+        chatPath.quadraticCurveTo(450,300,250,300);
+        chatPath.quadraticCurveTo(250,350,150,350);
+        chatPath.quadraticCurveTo(200,350,200,300);
+        
+        // 裁剪路径
+        ctx.clip(chatPath);
+        
+        // ctx.fill(heartPath);
+
+        // 获取图片
+        let img=new Image();
+        img.src="./imgs/吃饭.png"
+
+        img.onload=function(){
+            // 第一种绘制图片方式,图片对象，水平位置，垂直位置
+            // ctx.drawImage(img,0,0);
+
+            // 第二种绘制图片,图片对象，水平位置，垂直位置,图片缩放到对应宽度，高度
+            ctx.drawImage(img,0,0,600,400);
+
+            // 第三种绘制图片的方式，img参数后面的四个参数是，原图片要裁减的起点位置和矩形宽高，
+            // 后面四个参数是，画布位置和渲染的巨型宽高
+            // ctx.drawImage(img,10,10,100,100,0,0,600,400);
+            ctx.lineWidth=20;
+            ctx.stroke(chatPath);
+        }
+
+    </script>
+</body>
+</html>

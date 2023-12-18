@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas,请下载最新的浏览器
+    </canvas>
+
+    <script>
+        var c1=document.getElementById("c1");
+
+        if(!c1.getContext){
+            console.log("当前浏览器不支持canvas,请下载最新的浏览器")
+        }
+        
+        var ctx=c1.getContext("2d");
+
+        // 创建图案样式pattern
+        var img=new Image();
+        img.src="./imgs/吃饭.png"
+
+        img.onload=function(){
+            // 创建图案对象-图片对象(可以是 image对象，也可以是canvas) 重复方式repeat,no-repeat,repeat-x,repeat-y
+            var pattern=ctx.createPattern(img,"repeat");
+            ctx.fillStyle=pattern;
+            ctx.fillRect(0,0,600,400);
+        }
+    </script>
+</body>
+</html>

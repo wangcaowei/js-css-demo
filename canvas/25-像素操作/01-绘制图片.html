@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas,请下载最新的浏览器
+    </canvas>
+
+    <script>
+        var c1=document.getElementById("c1");
+
+        if(!c1.getContext){
+            console.log("当前浏览器不支持canvas,请下载最新的浏览器")
+        }
+        
+        var ctx=c1.getContext("2d");
+        // 获取图片
+        let img=new Image();
+        img.src="./imgs/吃饭.png"
+
+        img.onload=function(){
+            // 第一种绘制图片方式,图片对象，水平位置，垂直位置
+            // ctx.drawImage(img,0,0);
+
+            // 第二种绘制图片,图片对象，水平位置，垂直位置,图片缩放到对应宽度，高度
+            ctx.drawImage(img,0,0,600,400);
+
+            // 第三种绘制图片的方式，img参数后面的四个参数是，原图片要裁减的起点位置和矩形宽高，
+            // 后面四个参数是，画布位置和渲染的巨型宽高
+            // ctx.drawImage(img,10,10,100,100,0,0,600,400);
+            
+            // 获取像素数据
+            let imageData=ctx.getImageData(0,0,600,400);
+            console.log(imageData);
+            // 循环修改数据
+            for(let i=0;i<imageData.data.length;i+=4){
+                // 计算像素平均值
+                let avg=(imageData.data[i]+imageData.data[i+1]+imageData.data[i+2])/3;
+                imageData.data[i]=avg;
+                imageData.data[i+1]=avg;
+                imageData.data[i+2]=avg;
+                imageData.data[i+3]=avg;
+            }
+            // 将修改后的数据重新渲染到画布上
+            //ImageData,ImageData对象左上角的 x 坐标,ImageData对象左上角的 y 坐标,在画布上放置图像的位置x,在画布上放置图像的位置y,图像宽度，图像高度
+            ctx.putImageData(imageData,0,0,300,200,300,200);
+            
+        }
+
+    </script>
+</body>
+</html>

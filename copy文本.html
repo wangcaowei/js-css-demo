@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="copyCont('123456')">复制文本</button>
+    <textarea id="copy_text" style="position: absolute; left: -9999px;"></textarea>
+    <script>
+        // 封装复制方法
+        async function copyText(val, callback){
+            try {
+                if (navigator.clipboard && navigator.permissions) {
+                    await navigator.clipboard.writeText(val)
+                }else{
+                    let $copyText = document.getElementById('copy_text');
+                    $copyText.value = val;
+                    $copyText.readOnly = false;
+                    $copyText.select();
+                    $copyText.setSelectionRange(0, $copyText.value.length);
+                    document.execCommand("copy");
+                    $copyText.readOnly =true;
+                    // const textArea = document.createElement('textArea')
+                    // textArea.value = val
+                    // textArea.style.width = 0
+                    // textArea.style.position = 'fixed'
+                    // textArea.style.left = '-999px'
+                    // textArea.style.top = '10px'
+                    // textArea.setAttribute('readonly','readonly')
+                    // document.body.appendChild(textArea)
+                    // textArea.select()
+                    // document.execCommand('copy')
+                    // document.body.removeChild(textArea)
+                }
+                callback && callback();
+            }catch{
+                console.log("复制失败")
+            }
+        }
+
+        function copyCont(text){
+            copyText(text, ()=>{console.log("复制成功")})
+        }
+    </script>
+</body>
+</html>

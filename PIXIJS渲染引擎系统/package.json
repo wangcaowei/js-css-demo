@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "pixi-filters": "^5.2.1",
+    "pixi.js": "^7.2.4"
+  }
+}

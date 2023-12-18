@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div1 {
+            height: 100px;
+            background-color: cadetblue;
+        }
+        .div2 {
+            width: 300px;
+            height: 400px;
+            background-color: bisque;
+            float: left;
+        }
+        .div3 {
+            height: 400px;
+            display: flex;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: blueviolet;
+            border: 1px solid #f00;
+            overflow: scroll;
+        }
+        .content {
+            width: 100%;
+            height: 100%;
+            overflow: scroll;
+            background-color: aquamarine;
+        }
+        .div4 {
+            width: 2000px;
+            height: 100%;
+            background-color: coral;
+        }
+        .bfc {
+            overflow: hidden;
+            background-color: midnightblue;
+        }
+        .div5 {
+            height: 100px;
+            background-color: deeppink;
+            margin: 10px 0;
+        }
+        .div6 {
+            height: 100px;
+            background-color: yellow;
+            margin: 10px 0;
+        }
+        .newBfc {
+            overflow: hidden;
+        }
+        .div7 {
+            height: 100px;
+            background-color: blueviolet;
+            margin: 10px 0;
+        }
+        .div9 {
+            float: left;
+            width: 200px;
+            height: 100px;
+            background-color: #f00;
+        }
+        .div10 {
+            overflow: hidden;
+            /* display: flex; */
+        }
+        .div11>div:not(:last-child){
+            width: 35%;
+            height: 200px;
+            float: left;
+            margin: 0 1%;
+        }
+        .div12 {
+            background-color:blueviolet;
+        }
+        .div13 {
+            background-color: aqua;
+        }
+        .div14 {
+            overflow: hidden;
+            height: 200px;
+            background-color: blue;
+            margin: 0 1%;
+        }
+        .div15 {
+            overflow: hidden;
+            background-color: antiquewhite;
+        }
+        .div15>div{
+            width: 200px;
+            height: 450px;
+            float: left;
+            margin: 0 10px;
+            background-color: brown;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <!-- BFC 实现左右布局 -->
+        <h2>BFC 实现左右布局</h2>
+        <div class="div1">div1</div>
+        <div class="div2">div2</div>
+        <div class="div3">
+            <div class="content">
+                <div class="div4">123456</div>
+            </div>
+        </div>
+        <!-- BFC 避免上下外边距折叠 （不再同一个bfc中的元素不会产生上下外边距折叠）-->
+        <h2>BFC 避免上下外边距折叠</h2>
+        <div class="bfc">
+            <div class="div5">div5</div>
+            <div class="div6">div6</div>
+            <div class="newBfc">
+                <div class="div7">div7</div>
+            </div>
+        </div>
+        <!-- BFC 避免浮动后环绕文字 -->
+        <h2>BFC 避免浮动后环绕文字</h2>
+        <div class="div8">
+            <div class="div9">div9</div>
+            <div class="div10">
+                <div>div10-fdfdfsdfddiv10-fdfdfsdfddiv10-fdfdfs-fdfdfsdfddiv10</div>
+                <div>div10-fdfdfsdfddiv10-fdfdfsdfddiv10-fdfdfs-fdfdfsdfddiv10</div>
+                <div>div10-fdfdfsdfddiv10-fdfdfsdfddiv10-fdfdfs-fdfdfsdfddiv10</div>
+                <div>div10-fdfdfsdfddiv10-fdfdfsdfddiv10-fdfdfs-fdfdfsdfddiv10</div>
+                <div>div10-fdfdfsdfddiv10-fdfdfsdfddiv10-fdfdfs-fdfdfsdfddiv10</div>
+                <div>div10-fdfdfsdfddiv10-fdfdfsdfddiv10-fdfdfs-fdfdfsdfddiv10</div>
+                <div>div10-fdfdfsdfddiv10-fdfdfsdfddiv10-fdfdfs-fdfdfsdfddiv10</div>
+                <div>div10-fdfdfsdfddiv10-fdfdfsdfddiv10-fdfdfs-fdfdfsdfddiv10</div>
+            </div>
+        </div>
+        <!-- BFC 多列布局（避免最后一列下掉） -->
+        <h2>BFC 多列布局</h2>
+        <div class="div11">
+            <div class="div12"></div>
+            <div class="div13"></div>
+            <div class="div14"></div>
+        </div>
+        <!-- BFC 解决父元素坍塌 -->
+        <h2>BFC 解决父元素坍塌</h2>
+        <div class="div15">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</body>
+</html>

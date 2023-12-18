@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="text" value="123456789" id="edit">
+        <input type="text" value="" id="content">
+        <button onclick="getMove(-1)">光标前移</button>
+        <button onclick="getMove(1)">光标后移</button>
+        <button onclick="copyText()" id="copy_text">全选文本</button>
+        <button onclick="pasteText()" id="paste">粘贴</button>
+    </div>
+
+    <script>
+        // selectionStart<=selectionEnd ,两个值相等时，就是一个光标，后者大于前者时，就是选中部分内容
+        function getMove(step){
+            let inp=document.getElementById('edit');
+            inp.focus();
+            inp.setSelectionRange(inp.selectionStart + step, inp.selectionEnd + step);
+        }
+
+        function copyText(){
+            let inp=document.getElementById('edit');
+            inp.focus();
+            let copyBtn = document.getElementById('copy_text');
+            if(copyBtn.innerHTML === '全选文本'){
+                inp.select();
+                inp.setSelectionRange(0, inp.value.length);
+                document.execCommand("copy");
+                copyBtn.innerHTML = "取消全选";            
+            }else{
+                inp.selectionStart = inp.value.length;
+                inp.selectionEnd = inp.value.length;
+                copyBtn.innerHTML = "全选文本";
+            }
+        }
+
+        function pasteText(){
+            var content = document.getElementById("content");
+            content.focus();
+            // document.execCommand('paste');
+            navigator.clipboard.readText().then((text)=>{
+                content.value += text;
+                content.setSelectionRange(0, 0);
+                console.log(text);
+            })
+        }
+    </script>
+</body>
+</html>

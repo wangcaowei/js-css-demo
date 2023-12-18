@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 600px;
+            height: 400px;
+            overflow: scroll;
+            background-color: #f00;
+        }
+        .content{
+            width: 800px;
+            height: 800px;
+            background-color: bisque;
+        }
+        /* 滚动条样式 （宽、高）*/
+        ::-webkit-scrollbar {
+            width: 30px;
+            height: 30px;
+            background-color: aqua;
+        }
+        /* 滚动条轨道背景色 */
+        /* 与 ::-webkit-scrollbar 不同的是 ::-webkit-scrollbar-track 设置的是滑块可滑动区域的样式。 */
+        .box::-webkit-scrollbar-track {
+            background-color: blue;
+        }
+        /* 滑块样式 */
+        .box::-webkit-scrollbar-thumb {
+            background-color: blueviolet;
+            border-radius: 15px;
+        }
+        /* 水平和垂直滚动条相交（右下角方块元素样式） */
+        .box::-webkit-scrollbar-corner {
+            background-color: yellow;
+        }
+        /* 当元素设置为可拖动时（resize: horizontal | vertical | both），元素底角会出现可调整元素大小的滑块。 */
+        /* .box{
+            resize: horizontal;
+        }
+        .box::-webkit-resizer{
+            background-color: rgb(242, 5, 151);
+        } */
+
+        /* 设置滚动条两端的上下（左右）滚动按钮（上下、左右箭头） */
+        .box::-webkit-scrollbar-button {
+            width: 20px;
+            border-radius: 10px;
+            background-color: coral;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="content">
+            sdedef当同时含有垂直和水平方向的滚动条时它们的交叉部分。一般是元素的右下角。
+            sdedef当同时含有垂直和水平方向的滚动条时它们的交叉部分。一般是元素的右下角。
+            sdedef当同时含有垂直和水平方向的滚动条时它们的交叉部分。一般是元素的右下角。
+            sdedef当同时含有垂直和水平方向的滚动条时它们的交叉部分。一般是元素的右下角。
+            sdedef当同时含有垂直和水平方向的滚动条时它们的交叉部分。一般是元素的右下角。
+            sdedef当同时含有垂直和水平方向的滚动条时它们的交叉部分。一般是元素的右下角。
+            sdedef当同时含有垂直和水平方向的滚动条时它们的交叉部分。一般是元素的右下角。
+            sdedef当同时含有垂直和水平方向的滚动条时它们的交叉部分。一般是元素的右下角。
+        </div>
+    </div>
+</body>
+</html>

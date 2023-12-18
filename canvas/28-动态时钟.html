@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button.active{
+            color: #fff;
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="c1" width="800" height="600">
+        当前浏览器不支持canvas,请下载最新的浏览器
+    </canvas>
+
+    <script>
+        /** @type {HTMLCanvasElement} */
+
+        // 1.获取canvas画布和画笔
+        var c1=document.getElementById("c1");
+
+        if(!c1.getContext){
+            console.log("当前浏览器不支持canvas,请下载最新的浏览器")
+        }
+        var ctx=c1.getContext("2d");
+
+        function render(){
+            ctx.clearRect(0,0,800,600);
+            ctx.save();
+            // 移动坐标原始位置到画布中心
+            ctx.translate(400,300);
+            ctx.rotate(-Math.PI/2);
+            // 存档，保存当前坐标位置和上下文对象状态
+            ctx.save();
+            for(var i=0;i<12;i++){
+                // 绘制小时刻度
+                ctx.beginPath();
+                ctx.moveTo(170,0);
+                ctx.lineTo(190,0);
+                ctx.lineWidth=8;
+                ctx.strokeStyle="gray";
+                ctx.stroke();
+                ctx.closePath();
+                ctx.rotate(2*Math.PI / 12);
+            }
+
+            ctx.restore();
+            ctx.save();
+            
+            for(var i=0;i<60;i++){
+                ctx.beginPath();
+                ctx.moveTo(180,0);
+                ctx.lineTo(190,0);
+                ctx.lineWidth=2;
+                ctx.strokeStyle="gray";
+                ctx.stroke();
+                ctx.closePath();
+                ctx.rotate(2*Math.PI / 60);
+            }
+
+            ctx.restore();
+            ctx.save();
+
+            // 获取当前时间
+            var time=new Date();
+            var hour=time.getHours();
+            hour=hour>12?hour-12:hour;
+            var min=time.getMinutes();
+            var sec=time.getSeconds();
+
+            // 绘制秒针
+            ctx.rotate(2*Math.PI / 60 * sec);
+            ctx.beginPath();
+            ctx.moveTo(-30,0);
+            ctx.lineTo(190,0);
+            ctx.lineWidth=2;
+            ctx.strokeStyle="red";
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+            ctx.save();
+
+            // 绘制分针
+            ctx.rotate(2*Math.PI / 60 * min + 2*Math.PI/60/60*sec);
+            ctx.beginPath();
+            ctx.moveTo(-20,0);
+            ctx.lineTo(130,0);
+            ctx.lineWidth=4;
+            ctx.strokeStyle="gray";
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+            ctx.save();
+
+            // 绘制时针
+            ctx.rotate(2*Math.PI / 60 * hour + 2*Math.PI/12/60*min + 2*Math.PI/12/60/60*sec);
+            ctx.beginPath();
+            ctx.moveTo(-15,0);
+            ctx.lineTo(110,0);
+            ctx.lineWidth=8;
+            ctx.strokeStyle="#333";
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+            ctx.restore();
+            requestAnimationFrame(render);
+        }
+
+        render();
+
+    </script>
+</body>
+</html>

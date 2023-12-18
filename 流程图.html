@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <style>
+        #container {
+            border: 1px solid #333;
+            width: fit-content;
+            padding: 50px 74px 50px 50px;
+            cursor: all-scroll;
+            box-shadow: 2px 2px 5px #333;
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+        .relative {
+            position: relative;
+        }
+        .borderlr {
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            padding-right: 23px;
+            width: fit-content;
+            margin-left: 23px;
+        }
+        .borderlr::after {
+            position: absolute;
+            top: 50%;
+            right: -24px;
+            content: '';
+            width: 24px;
+            height: 1px;
+            background-color: #ccc;
+        }
+
+        .borderlr::before{
+            position: absolute;
+            top: 50%;
+            left: -24px;
+            content: '';
+            width: 24px;
+            height: 1px;
+            background-color: #ccc;
+        }
+
+        .father {
+            pointer-events: none;
+        }
+
+        .father .flex {
+            display: flex;
+            align-items: center;
+        }
+        .father .box {
+            width: 65px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border: 1px solid #ccc;
+            font-weight: 600;
+            position: relative;
+            margin: 20px 0 20px 23px;
+        }
+        .father .box::before{
+            position: absolute;
+            top: 50%;
+            left: -24px;
+            content: '';
+            width: 24px;
+            height: 1px;
+            background-color: #ccc;
+        }
+        .father .box::after{
+            position: absolute;
+            top: 50%;
+            right: -24px;
+            content: '';
+            width: 24px;
+            height: 1px;
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="container">
+            <!-- 最外层父元素 -->
+            <div class="father relative borderlr">
+                <!-- ||渲染 -->
+                <div v-for="(val,idx) in array" :key="idx">
+                    <div class="box" v-if="typeof val === 'number'">{{val}}</div>
+                    <div v-else class="flex">
+                        <div v-for="(val1,idx1) in val" :key="idx1">
+                            <div v-if="typeof val1 === 'number'" class="box" >
+                                {{val1}}
+                            </div>
+                            <div v-else class="relative borderlr">
+                                <div v-for="(val2,idx2) in val1" :key="idx2">
+                                    <div class="box" v-if="typeof val2 === 'number'" >{{val2}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!',
+                array: [
+                    1,
+                    [2,3],
+                    [[4,5],6]
+                ],
+                isDrag: false,
+                container:'',
+                startX:'',
+                startY:''
+            },
+            mounted(){
+                this.container=document.getElementById("container");
+                this.container.onmousedown=this.startDrag;
+                this.container.onmouseup=this.endDrag;
+                this.container.onmousemove=this.moveContainer;
+            },
+            methods:{
+                startDrag(e){
+                    this.isDrag=true;
+                    this.startX=e.offsetX;
+                    this.startY=e.offsetY;
+                    this.container.onmousemove=this.moveContainer;
+                },
+                endDrag(){
+                    this.isDrag=false;
+                    this.startX=0;
+                    this.startY=0;
+                    this.container.onmousemove=null
+                },
+                moveContainer(e){
+                    if(this.isDrag){
+                        let x=e.clientX-this.startX;
+                        let y=e.clientY-this.startY;
+                        if(x<0)x=0;
+                        if(x>window.innerWidth-this.container.offsetWidth){
+                            x=window.innerWidth-this.container.offsetWidth;
+                        }
+                        if(y<0)y=0;
+                        if(y>window.innerHeight-this.container.offsetHeight){
+                            y=window.innerHeight-this.container.offsetHeight;
+                        }
+                        this.container.style.top=y+'px';
+                        this.container.style.left=x+'px';
+                    }
+                },
+                // 递归str获取数组数据
+                getArrayFromStr(){
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>

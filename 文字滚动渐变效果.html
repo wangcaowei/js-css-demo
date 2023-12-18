@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .g-wrap {
+            background: #000;   
+        }
+
+        .g-wrap p {
+            width: 800px;
+            color: transparent;
+            background: linear-gradient(-4deg, transparent, transparent 25%, #ffb6ff, #b344ff,transparent 75%, transparent);
+            background-clip: text;
+            background-size: 100% 400%;
+            background-position: center 0;
+            animation: textScroll 6s infinite linear alternate;
+        } 
+
+        @keyframes textScroll {
+            100% {
+                background-position: center 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="g-wrap">
+        <p>灵动的 iPhone 新玩法，迎面而来。重大的安全新功能，为拯救生命而设计。创新的 4800 万像素主摄，让细节纤毫毕现。更有 iPhone 芯片中的速度之王，为一切提供强大原动力。  
+        </p>
+    </div>
+</body>
+</html>

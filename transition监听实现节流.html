@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button.save{
+            opacity: .99;
+            transition: opacity 2s;
+        }
+        button.save:not(:disabled):active{
+            opacity: 1;
+            transition: 0s;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="console.log('普通保存')">我是“普通”保存</button>
+    <button class="save" onclick="console.log('节流保存')">我是“节流”保存</button>
+
+    <script>
+        // 过渡开始
+        document.addEventListener('transitionstart', function(ev){
+            ev.target.disabled = true
+        })
+        // 过渡结束
+        document.addEventListener('transitionend', function(ev){
+            ev.target.disabled = false
+        })
+    </script>
+</body>
+</html>

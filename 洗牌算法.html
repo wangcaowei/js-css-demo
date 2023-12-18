@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [1,2,3,4,5,6];
+
+        // 洗牌算法、数组随机排序法
+        // 从原始数组中每次随机选中一个元素，然后放入新数组中，每取出一个元素后，将将它从原数组中取出（使用splice方法），原数组长度减一
+        function shuffle(arr) {
+            let resArr = [];
+            while(arr.length) {
+                let random = Math.floor(Math.random() * arr.length);
+                resArr.push(arr[random]);
+                arr.splice(random,1)
+            }
+            return resArr;
+        }
+
+        function shuffle2(arr) {
+            for(let i=0; i<arr.length; i++) {
+                let random = Math.floor(Math.random()* arr.length);
+                // let rVal = arr[random];
+                // arr[random] = arr[i];
+                // arr[i] = rVal;
+                arr[random] = arr.splice(i,1,arr[random])[0];
+            }
+            return arr
+        }
+
+        console.log('洗牌算法展示', shuffle2(arr));
+    </script>
+</body>
+</html>

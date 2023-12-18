@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400">
+        当前浏览器不支持canvas,请下载最新的浏览器
+    </canvas>
+
+    <script>
+        var c1=document.getElementById("c1");
+
+        if(!c1.getContext){
+            console.log("当前浏览器不支持canvas,请下载最新的浏览器")
+        }
+        
+        var ctx=c1.getContext("2d");
+
+        // arc绘制圆弧方法(圆心x，圆心y,半径，开始角度，结束角度，逆时针true还是顺时针默认false)
+        // ctx.arc(300,200,50,0,Math.PI/2, false);
+        // ctx.fill();
+        // ctx.stroke();
+
+        // 绘制一张脸
+        ctx.beginPath();
+        ctx.arc(75,75,50,0,Math.PI*2);
+        ctx.stroke();
+        ctx.closePath();
+        // 绘制嘴巴
+        ctx.beginPath();
+        ctx.arc(75,75,35,0,Math.PI);
+        ctx.stroke();
+        ctx.closePath();
+        // 绘制左眼
+        ctx.beginPath();
+        ctx.arc(60,65,5,0,Math.PI*2);
+        ctx.stroke();
+        ctx.closePath();
+        // 绘制右眼
+        ctx.beginPath();
+        ctx.arc(90,65,5,0,Math.PI*2);
+        ctx.closePath();
+        ctx.stroke();
+    </script>
+</body>
+</html>
